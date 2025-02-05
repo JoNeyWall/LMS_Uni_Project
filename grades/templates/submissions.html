@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="utf8">
+
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/static/main.css">
+
+{% include "header.html" with title="Submissions" %}
+
+<main>
+    <h2>{{assignment.title}}</h2>
+    {% if is_ta %}
+    <p>
+        All grades are out of 100.
+    </p>
+
+    <form action="/{{assignment.id}}/submissions" method="POST">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <h3>Student</h3>
+                    </th>
+                    <th>
+                        <h3>Submissions</h3>
+                    </th>
+                    <th>
+                        <h3>Grade</h3>
+                    </th>
+                </tr>
+            </thead>
+
+            {% for submission in submissions %}
+            <tr>
+                <th><label for="{{forloop.counter0}}">{{submission.author.get_full_name}}</label></th>
+                <th>
+                    <a href="/uploads/{{submission.file}}" title="Link to {{submission.author.get_full_name}} submission">Submission</a>
+                </th>
+                <th>
+                    <input id="{{forloop.counter0}}" name="grade-{{submission.id}}"type="number" value="{{submission.score}}" max="100" min="0">
+                </th>
+                <td>
+                    <output>
+                        {% with id=submission.id %}
+                            {% for key, value in errors.items %}
+                                {% if key == id %}
+                                    {% for error in value %}
+                                        {{error}}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </output>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <button>Submit</button>
+        {% else %}
+        <p>As a student you do not have permission to view or grade submissions.</p>
+        {% endif %}
+        <a href="/{{assignment.id}}/">Back to assignment</a>
+    </form>
+</main>

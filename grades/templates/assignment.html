@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="utf8">
+
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/static/main.css">
+
+{% include "header.html" with title=assignment.title %}
+
+<main>
+    <div>
+        <h2>{{assignment.title}}</h2>
+        
+        <p>
+            Due {{assignment.deadline}}, total of {{assignment.points}} points.
+        </p>
+
+        {% if is_student %}
+        <output>{{error}}</output>
+        <div class="action_box">
+            <p>{{grade_info|safe}}</p>
+            {% if not past_due %}
+            <form class="async-submit" action="/{{assignment.id}}/" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="file" accept="application/pdf">
+                <button type="submit">Submit</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if is_ta %}
+        <div class="action_box">
+            <div>
+                <p>Currently {{submission_total}}/{{student_total}} submission{{student_total|pluralize}}</p>
+                <p>{{assigned_total}} submission{{assigned_total|pluralize}} assigned to you</p>
+            </div>
+            <a href="/{{assignment.id}}/submissions">Grade</a>
+        </div>
+        {% endif %}
+
+        <h3>Description</h3>
+        {{assignment.description|safe}}
+    </div>
+</main>

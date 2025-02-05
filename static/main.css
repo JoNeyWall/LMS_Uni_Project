@@ -1,0 +1,187 @@
+/*Font Imports*/
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/*All text should be IBM Plex Sans, except code*/
+* {
+    font-family: 'IBM Plex Sans','Sans-Serif'; 
+    line-height: 1.25;
+}
+
+/*Nav bar*/
+header {
+    width: 100%;
+    background-color: grey;
+    box-shadow: 0px 0px 5px;
+}
+header span{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 50rem;
+}
+header div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+header div h1{
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: black;
+}
+header div nav {
+    font-weight: normal;
+    color: #444;
+    font-size: 1.25rem;
+}
+header div nav a:visited{
+    color: #444;
+}
+header div h1 a:visited{
+    color: black;
+}
+
+/*Phase 2*/
+main h2 {
+    font-size: 1.5rem;
+}
+
+main form label{
+    font-size: 1.25rem
+}
+
+main form input{
+    font-size: 1.25rem
+}
+
+main form button{
+    font-size: 1.25rem
+}
+
+/*Phase 3*/
+a {
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+table {
+    line-height: 1.5;
+    width: 100%;
+}
+
+th.table_number_entry {
+    text-align: right;
+}
+
+td.table_number_entry {
+    text-align: right;
+}
+
+th {
+    text-align: left;
+}
+
+td {
+    text-align: left;
+}
+
+form.form_login {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+form.form_login div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+form.form_login div input{
+    width: 50%;
+}
+
+form.form_login div.login_button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+form.form_login div.login_button button{
+    width: 50%;
+}
+
+/*Phase 4*/
+html {
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-width: 50rem;
+    padding: 1rem;
+}
+
+div.action_box{
+    background-color: #b1c3de;
+    border: 2px solid #204a87;
+}
+
+h2{
+    margin-top: 3rem;
+    border-bottom: 3px solid grey;
+}
+
+/*Phase 5*/
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+.action_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+/*Assignment 4 Validation*/
+input:invalid {
+    border: 2px red;
+}
+
+output {
+    font-weight: bold;
+    color: red;
+}
+
+th.sort-column { 
+    cursor: pointer; 
+}
+
+th.sort-asc::after { 
+    content: " \25b2"; 
+}
+
+th.sort-desc::after { 
+    content: " \25bc"; 
+}
+

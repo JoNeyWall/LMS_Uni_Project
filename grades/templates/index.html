@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="utf8">
+
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/static/main.css">
+
+{% include "header.html" with title="Assignments" %}
+
+<main>
+    <h2>All Assignments</h2>
+    <table class="sortable">
+        <thead>
+            <tr>
+                <th>Assignment</th>
+                <th class="sort-column">Due Date</th>
+                <th class="table_number_entry">Weight</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for assignment in all_assignments %}
+            <tr data-index="{{forloop.counter}}">
+                <td data-value="{{assignment.deadline|date:'U'}}"><a href="/{{assignment.id}}/">{{assignment.title}}</a></td>
+                <td data-value="{{assignment.deadline|date:'U'}}">{{assignment.deadline}}</td>
+                <td class="table_number_entry" data-value="{{assignment.deadline|date:'U'}}">{{assignment.weight}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>

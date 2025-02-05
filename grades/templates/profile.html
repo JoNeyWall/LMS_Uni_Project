@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf8">
+
+<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/static/main.css">
+
+{% include "header.html" with title="Profile" %}
+
+{% if not is_ta %}
+<main class="profile-student">
+{% else %}
+<main>
+{% endif %}
+    <h2>Your Grades</h2>
+
+    <div class="action_box">
+        Currently logged in as {{user.get_full_name}}. <a href="/profile/logout"><button>Log out</button></a>
+    </div>
+
+    <table class="sortable">
+        <thead>
+            <tr>
+                <th>
+                    <h3>Assignment</h3>
+                </th>
+                {% if is_ta %}
+                <th class="table_number_entry">
+                    <h3>Graded</h3>
+                </th>
+                {% else %}
+                <th class="table_number_entry sort-column">
+                    <h3>Score</h3>
+                </th>
+                {% endif %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for title, graded, assigned, assignment_id, score, weight in zipped_data %}
+                {% if is_ta %}
+            <tr data-index="{{forloop.counter}}">
+                <td><a href="/{{assignment_id}}/submissions">{{title}}</a></td>
+                <td class="table_number_entry">{{graded}}/{{assigned}}</td>
+            </tr>
+                {% else %}
+            <tr data-index="{{forloop.counter}}">
+                <td data-value="{{score}}"><a href="/{{assignment_id}}/">{{title}}</a></td>
+                <td class="table_number_entry score-entry" data-value="{{score}}" data-weight="{{weight}}">{{score}}</td>
+            </tr>
+                {% endif %}
+            {% endfor %}
+
+            {% if not is_ta %}
+            <tr class="final-grade-row" data-index="{{forloop.counter}}">
+                <th>Final Grade</th>
+                <th class="table_number_entry final-grade-entry">{{final_score}}</th>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</main>
